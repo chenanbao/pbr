@@ -222,13 +222,19 @@ float GaussianNormalDistribution(float roughness, float NdotH)
 
 float GGXNormalDistribution(float roughness, float NdotH)
 {
-    float roughnessSqr = roughness*roughness;
-    float NdotHSqr = NdotH*NdotH;
-    float TanNdotHSqr = (1-NdotHSqr)/NdotHSqr;
-    return (1.0/3.1415926535) * sqr(roughness/(NdotHSqr * (roughnessSqr + TanNdotHSqr)));
-//    float denom = NdotHSqr * (roughnessSqr-1)
+   // float roughnessSqr = roughness*roughness;
+    //float NdotHSqr = NdotH*NdotH;
+   // float TanNdotHSqr = (1-NdotHSqr)/NdotHSqr;
+   // return (1.0/3.1415926535) * sqr(roughness/(NdotHSqr * (roughnessSqr + TanNdotHSqr)));
 
+      fixed a      = roughness*roughness;
+	 fixed a2     = a*a;
+	 fixed denom = ( NdotH*NdotH * (a2 - 1.0) + 1.0);
+			  
+			    return  a2 / (UNITY_PI * denom * denom);
 }
+
+
 
 float TrowbridgeReitzNormalDistribution(float NdotH, float roughness){
     float roughnessSqr = roughness*roughness;
